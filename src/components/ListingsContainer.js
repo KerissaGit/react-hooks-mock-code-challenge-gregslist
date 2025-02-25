@@ -10,7 +10,14 @@ function ListingsContainer() {
       .then(data => setListings(data))
   }, [])
 
-  
+  function removeListing (listingId){
+    console.log(listingId)
+    setListings((currentListings) => {
+      return currentListings.filter((listing) => {
+        return listing.id !== listingId
+      })
+    })
+  }
 
   // const renderListings = listings.map(({id, description, image, location}) => (
   //   <ListingCard 
@@ -32,6 +39,7 @@ function ListingsContainer() {
             description={listing.description}
             image={listing.image}
             location={listing.location}
+            onRemoveListin={removeListing}
           />
         ))}
       </ul>

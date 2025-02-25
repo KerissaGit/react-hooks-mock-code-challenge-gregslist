@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function ListingCard(listings) {
+function ListingCard(listings, onRemoveListing) {
   const [ favorite, setFavoriteButton ] = useState(false)
 
   function favoriteButton() {
@@ -8,12 +8,13 @@ function ListingCard(listings) {
     console.log('Was clicked')
   }
 
+
   function deleteButton() {
     fetch(`http://localhost:6001/listings/${listings.id}`, {
       method: 'DELETE'
     }).then((resp) => {
       if (resp.ok) {
-        console.log('deleted')
+        onRemoveListing(listings.id)
       } else { 
         throw Error('Something went')
       }
